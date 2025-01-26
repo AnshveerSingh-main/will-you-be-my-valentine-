@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Lora', serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            position: relative;
+            padding: 10px;
+        }
+
+        #welcome-page {
+            background: url('https://img.freepik.com/free-vector/flat-spring-background_23-2149296460.jpg') no-repeat center center/cover;
+            background-size: cover;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        #proposal-page {
+            background: url('https://e0.pxfuel.com/wallpapers/746/84/desktop-wallpaper-animated-cartoon-blue-sky-with-white-clouds-motion-background-videoblocks.jpg') no-repeat center center/cover;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        #confirmation-page {
+            background: url('https://img.pikbest.com/wp/202345/cartoon-spring-flower-landscape-with-colorful-flowers_9600716.jpg!sw800') no-repeat center center/cover;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .message {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px black;
+        }
+
+        #confirmation-page .message {
+            font-size: 1.2rem; /* Smaller font size for confirmation page */
+            text-shadow: 2px 2px 4px black, -2px -2px 4px black;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 8px 16px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+            background-color: transparent;
+            border: 2px solid white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        img {
+            max-width: 80%;
+            height: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Welcome Page -->
+    <div class="center" id="welcome-page">
+        <div class="message">Hey babe, something special awaits you!</div>
+        <img src="https://media.tenor.com/7lDNjrucw_8AAAAi/sseeyall-bubu-dudu.gif" alt="Proposal GIF" style="margin: 20px; width: 180px;">
+        <button onclick="goToProposalPage()">Click Here</button>
+    </div>
+
+    <!-- Proposal Page -->
+    <div class="center" id="proposal-page" style="display: none;">
+        <div class="message">Will you be my Valentine, Mandeep?</div>
+        <img src="https://media.tenor.com/YeALWQcVFpEAAAAi/bubu-dudu-rose-dudu-propose.gif" alt="Proposal GIF" style="margin: 20px; width: 250px;">
+        <div style="margin-top: 20px;">
+            <button onclick="handleResponse('yes')">Yes 😄</button>
+            <button onclick="handleResponse('also_yes')">Also Yes 😊</button>
+            <button onclick="handleResponse('big_yes')">A BIGG YESSS ❤️</button>
+            <button onclick="handleResponse('no')">No 😔</button>
+        </div>
+        <button onclick="goBackToWelcomePage()">Back</button>
+    </div>
+
+    <!-- Confirmation Page -->
+    <div class="center" id="confirmation-page" style="display: none;">
+        <div id="confirmation-message" class="message"></div>
+        <img id="confirmation-gif" src="" alt="Response GIF" style="margin: 20px; width: 300px;">
+        <audio id="romantic-song" controls style="margin-top: 20px; display: none;">
+            <source src="https://github.com/AnshveerSingh-main/song/raw/refs/heads/main/Tu_Hi_Meri_Shab_Hai-68390.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <button onclick="goBackToProposalPage()">Back</button>
+    </div>
+
+    <script>
+        function goToProposalPage() {
+            document.getElementById('welcome-page').style.display = 'none';
+            document.getElementById('proposal-page').style.display = 'flex';
+        }
+
+        function goBackToWelcomePage() {
+            document.getElementById('proposal-page').style.display = 'none';
+            document.getElementById('welcome-page').style.display = 'flex';
+        }
+
+        function handleResponse(option) {
+            document.getElementById('proposal-page').style.display = 'none';
+            document.getElementById('confirmation-page').style.display = 'flex';
+
+            const message = document.getElementById('confirmation-message');
+            const gif = document.getElementById('confirmation-gif');
+            const song = document.getElementById('romantic-song');
+
+            if (option === 'yes' || option === 'also_yes' || option === 'big_yes') {
+                message.innerHTML = `
+                    Hehehe... Thank you for making my day special!<br><br>
+                    I can’t wait to create more memories with you my love. 💖
+                `;
+                gif.src = "https://media.tenor.com/VqT0Rp-x0hcAAAAi/bubu-dudu-sseeyall.gif";
+                song.style.display = 'block';
+                song.play();
+            } else {
+                message.innerHTML = `
+                    Haww, that made me sad 😔.<br><br>
+                    I know you make bad choices when mad at me.<br><br>
+                    But there is always a back button to make a better choice 😉.
+                `;
+                gif.src = "https://media.tenor.com/rwZ1KmV8ZAoAAAAi/bubu-dudu-sseeyall.gif";
+                song.style.display = 'none';
+                song.pause();
+            }
+        }
+
+        function goBackToProposalPage() {
+            document.getElementById('confirmation-page').style.display = 'none';
+            document.getElementById('proposal-page').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
